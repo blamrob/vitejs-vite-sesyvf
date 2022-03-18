@@ -1,0 +1,740 @@
+//   -=-=-=-=-=-=-=-=-=-=-=-=-
+// -=|  DEFAULT FORM STYLES  |=-
+//   -=-=-=-=-=-=-=-=-=-=-=-=-
+
+.fg1 {
+	// 2 EVEN COLUMNS TABLET MIN
+	margin: 25px 0;
+	.placeholder {
+		display: none;
+	}
+	@mixin fg1 {
+		display: flex;
+		justify-content: space-between;
+		.input-field,
+		.input-select,
+		.input-date,
+		.input-date-picker,
+		.input-time,
+		.input-switch,
+		.input-switch-tog,
+		.placeholder {
+			display: block;
+			width: calc(50% - 15px);
+			margin: 0;
+		}
+	}
+	@include tablet-min {
+		@include fg1;
+	}
+	&.fg-all {
+		// FORCES 2 COLUMNS ON MOBILE
+		@include fg1;
+	}
+}
+
+.fg2 {
+	// 3 EVEN COLUMNS TABLET MIN
+	// if used with 2 columns, 2nd column is 2/3 width
+	margin: 25px 0;
+	@mixin fg2 {
+		display: flex;
+		justify-content: space-between;
+		.input-field,
+		.input-select,
+		.input-date,
+		.input-date-picker,
+		.input-time,
+		.input-switch,
+		.input-switch-tog {
+			display: block;
+			width: calc(33.333333% - 20px);
+			margin: 0;
+			&:nth-child(2):last-child {
+				width: calc(66.666666% - 10px);
+			}
+			&:first-child:last-child {
+				width: 100%;
+			}
+		}
+	}
+	@include tablet-min {
+		@include fg2;
+	}
+	&.fg-all {
+		// FORCES 3 COLUMNS ON MOBILE
+		@include fg2;
+	}
+}
+
+.input-field,
+.input-select,
+.input-date,
+.input-date-picker,
+.input-time,
+.input-switch,
+.input-switch-tog {
+	display: block;
+	margin: 25px 0;
+	&:first-child {
+		margin-top: 0;
+	}
+	&:last-child {
+		margin-bottom: 0;
+	}
+	label,
+	legend {
+		display: table;
+		font-size: remify(16);
+		font-weight: 600;
+		margin: 0 0 5px 0;
+		sup {
+			color: $color-alert;
+		}
+	}
+	input {
+		background-color: white;
+		border: 2px solid $gray1;
+		display: block;
+		font-size: remify(16);
+		line-height: 1.5;
+		text-align: left;
+		width: 100%;
+		padding: 10px;
+	}
+	.alert {
+		display: block;
+		color: $color-alert;
+		margin: 5px 0 0 0;
+	}
+	.note {
+		color: $gray2;
+		margin: 5px 0 0 0;
+	}
+	&.alert input {
+		background-color: lighten($color-alert, 40);
+		border-color: $color-alert;
+	}
+}
+
+.input-field,
+.input-select {
+	select {
+		@include appearance(none);
+		background-color: white;
+		border: 2px solid $gray1;
+		display: block;
+		position: relative;
+		font-size: remify(16);
+		line-height: 1.5;
+		text-align: left;
+		width: 100%;
+		padding: 10px;
+		z-index: 1;
+	}
+	.ui {
+		position: relative;
+		z-index: 1;
+		&::after {
+			display: block;
+			pointer-events: none;
+			position: absolute;
+			top: 0;
+			right: 12px;
+			width: 22px;
+			height: 22px;
+			color: $gray1;
+			content: '';
+			font-family: 'Font Awesome 5 Free';
+			font-size: 12px;
+			line-height: 28px;
+			font-weight: 900;
+			text-align: center;
+			padding: 10px;
+			z-index: 4;
+		}
+	}
+	&.alert {
+		select {
+			background-color: lighten($color-alert, 40);
+			border-color: $color-alert;
+		}
+		.ui::after {
+			color: $color-alert;
+		}
+	}
+}
+
+.input-date {
+	.ui {
+		background-color: $gray1;
+		border: 1px solid $gray2;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		width: 200px;
+		font-size: 0;
+		text-align: center;
+		white-space: nowrap;
+		margin: 0;
+		padding: 0;
+		span {
+			font-size: remify(16);
+			line-height: 1.2;
+			margin: 0;
+			padding: 0;
+		}
+	}
+	.icn {
+		background-color: $color2;
+		cursor: pointer;
+		display: inline-block;
+		width: 40px;
+		color: white;
+		font-size: remify(16);
+		line-height: 1.2;
+		text-align: center;
+		margin: 0;
+		padding: 5px;
+	}
+	input {
+		background-color: transparent;
+		border: 0;
+		display: inline-block;
+		font-size: remify(16);
+		line-height: 1.2;
+		text-align: center;
+		width: 36px;
+		padding: 5px 0;
+		&:first-of-type {
+			margin-left: 8px;
+		}
+		&:last-of-type {
+			margin-right: 8px;
+		}
+		&:last-child {
+			width: 56px;
+		}
+	}
+	&.alert {
+		.ui {
+			background-color: lighten($color-alert, 40);
+			border: 1px solid $color-alert;
+		}
+		.icn {
+			background-color: $color-alert;
+		}
+	}
+	&.picker {
+		input,
+		input:last-child {
+			width: calc(100% - 40px);
+		}
+	}
+}
+
+.input-time {
+	.ui {
+		border: 1px solid $gray2;
+		background-color: $gray1;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		width: 200px;
+		font-size: remify(16);
+		text-align: center;
+		white-space: nowrap;
+	}
+	.icn {
+		background-color: $color2;
+		cursor: pointer;
+		display: inline-block;
+		width: 40px;
+		color: white;
+		font-size: remify(16);
+		line-height: 1.2;
+		text-align: center;
+		margin: 0;
+		padding: 5px;
+	}
+	input {
+		background-color: transparent;
+		border: none;
+		display: inline-block;
+		font-size: remify(16);
+		line-height: 1.2;
+		text-align: center;
+		width: 36px;
+		margin: 0;
+		padding: 5px 0;
+		&:first-child {
+			margin-left: 10px;
+		}
+		&:nth-child(3) {
+			margin-right: 10px;
+		}
+		&:last-child {
+			width: 60px;
+		}
+	}
+	.ampm {
+		align-self: stretch;
+		display: flex;
+		justify-content: space-between;
+		align-content: center;
+		overflow: hidden;
+		position: relative;
+		font-size: 0;
+		vertical-align: middle;
+		white-space: nowrap;
+		margin: 0;
+		padding: 0;
+		z-index: 1;
+		input {
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			display: inline-block;
+			position: absolute;
+			left: 5px;
+			top: 5px;
+			width: 0;
+			height: 0;
+			font-size: 0;
+			line-height: 0;
+			vertical-align: middle;
+			margin: 0;
+			padding: 0;
+			z-index: -2;
+		}
+		label {
+			background-color: darken($gray1, 3);
+			box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+			display: inline-block;
+			transition: all 0.1s ease-in-out;
+			width: 42px;
+			color: rgba($gray3, 0.25);
+			font-size: 16px;
+			font-weight: 400;
+			line-height: 1.2;
+			text-align: center;
+			text-shadow: none;
+			vertical-align: middle;
+			margin: 0;
+			padding: 5px;
+			&:last-child {
+				border-left: none;
+			}
+		}
+		input:checked + label {
+			background-color: lighten($gray1, 5);
+			box-shadow: none;
+			color: $gray3;
+			font-weight: 600;
+		}
+	}
+	&.alert {
+		.ui {
+			background-color: lighten($color-alert, 40);
+			border-color: $color-alert;
+		}
+		.icn {
+			background-color: $color-alert;
+		}
+		.ampm {
+			label {
+				background-color: lighten($color-alert, 35);
+			}
+			input:checked + label {
+				background-color: lighten($color-alert, 45);
+			}
+		}
+	}
+}
+
+.input-switch {
+	legend {
+		width: 100%;
+	}
+	label {
+		display: table;
+		margin: 10px 0;
+	}
+	.switch-group {
+		display: block;
+		label {
+			display: block;
+			margin: 5px 0;
+			&:last-child {
+				margin: 0;
+			}
+		}
+	}
+	&.switch-inline {
+		.switch-group {
+			display: flex;
+			flex-wrap: wrap;
+			label {
+				display: block;
+				margin: 0 15px 0 0;
+				&:last-child {
+					margin: 0;
+				}
+			}
+		}
+	}
+	input {
+		@include appearance(none);
+		background-color: $gray1;
+		border: 1px solid $gray2;
+		display: inline-block;
+		outline: none;
+		position: relative;
+		width: 24px;
+		height: 24px;
+		font-size: 0;
+		vertical-align: middle;
+		margin: 0;
+		padding: 0;
+		z-index: 1;
+		&::after {
+			transition: all 300ms;
+			display: block;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			content: '';
+			color: $color2;
+			font-family: 'Font Awesome 5 Free';
+			font-size: 0;
+			font-weight: 900;
+			transform: translate(-50%, -50%);
+			z-index: 3;
+		}
+		&:checked::after {
+			font-size: 16px;
+		}
+	}
+	&.switch-radio {
+		input {
+			border-radius: 50%;
+			&::after {
+				background-color: transparent;
+				width: 0;
+				height: 0;
+				content: '';
+			}
+			&:checked::after {
+				background-color: $color2;
+				border-radius: 50%;
+				width: 16px;
+				height: 16px;
+			}
+		}
+	}
+	&.alert {
+		input::after {
+			color: $color-alert;
+		}
+		&.switch-radio input:checked::after {
+			background-color: $color-alert;
+		}
+	}
+}
+
+.input-switch-tog {
+	display: block;
+	position: relative;
+	color: $gray3;
+	padding: 0;
+	z-index: 1;
+	.ui {
+		cursor: pointer;
+		display: table;
+		font-size: 0;
+		vertical-align: middle;
+		margin: 0;
+		padding: 0;
+		input {
+			display: none;
+		}
+	}
+	.switch-group {
+		background-color: white;
+		border: 1px solid $gray1;
+		align-items: center;
+		display: flex;
+		position: relative;
+		user-select: none;
+		height: 28px;
+		color: white;
+		margin: 0;
+		padding: 0;
+		z-index: 1;
+		span {
+			display: block;
+			color: $gray3;
+			font-weight: 400;
+			line-height: 22px;
+			text-align: center;
+		}
+		.switch-yes {
+			// transition: all 350ms;
+			font-size: 0;
+			opacity: 0;
+			padding: 0;
+		}
+		.switch-no {
+			// transition: all 350ms;
+			font-size: 16px;
+			opacity: 1;
+			padding: 5px 5px 5px 30px;
+		}
+		i,
+		svg {
+			transition: all 350ms;
+			background-color: rgba($color2, 0.4);
+			display: block;
+			opacity: 1;
+			position: absolute;
+			top: 2px;
+			left: 2px;
+			width: 22px;
+			height: 22px;
+			color: white;
+			font-size: 12px;
+			line-height: 12px;
+			text-align: center;
+			padding: 5px;
+			z-index: 4;
+		}
+		i.icon-on,
+		svg.icon-on {
+			opacity: 0;
+			z-index: 5;
+		}
+	}
+	input:checked + .switch-group {
+		background-color: $color2;
+		span {
+			color: white;
+		}
+		.switch-yes {
+			font-size: 16px;
+			opacity: 1;
+			padding: 5px 30px 5px 5px;
+		}
+		.switch-no {
+			font-size: 0;
+			opacity: 0;
+			padding: 0;
+		}
+		i,
+		svg {
+			transition: all 300ms;
+			background-color: white;
+			left: calc(100% - 24px);
+			color: $color2;
+			content: '';
+		}
+		i.icon-on,
+		svg.icon-on {
+			opacity: 1;
+		}
+		i.icon-off,
+		svg.icon-off {
+			opacity: 0;
+		}
+	}
+	&.switch-inline div {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		.ui {
+			flex-grow: 0;
+			order: 1;
+			margin: 0 10px 0 0;
+		}
+		.lbl {
+			flex-grow: 1;
+			order: 2;
+			margin: 0;
+			label {
+				margin: 0;
+			}
+		}
+	}
+	&.alert {
+		.switch-group {
+			background-color: lighten($color-alert, 40);
+			border-color: $color-alert;
+			i,
+			svg {
+				background-color: rgba($color-alert, 0.4);
+			}
+		}
+		input:checked + .switch-group {
+			background-color: $color-alert;
+			border-color: $color-alert;
+			i,
+			svg {
+				background-color: white;
+				color: $color-alert;
+			}
+		}
+	}
+}
+
+@mixin btn($c1: $color1, $fs: 16, $pad: 10px 30px) {
+	@include appearance(none);
+	transition: all 75ms ease-out;
+	background-color: transparent;
+	border: 2px solid $c1;
+	display: inline-block;
+	position: relative;
+	overflow: hidden;
+	user-select: none;
+	color: $c1;
+	cursor: pointer;
+	font-size: remify($fs);
+	line-height: 1;
+	text-transform: uppercase;
+	margin: 5px;
+	padding: $pad;
+	z-index: 1;
+	@content;
+	&::after {
+		transition: all 75ms ease-out;
+		background-color: $c1;
+		display: block;
+		content: '';
+		position: absolute;
+		top: 100%;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+	}
+	&:hover {
+		transition: all 150ms ease-in;
+		color: white;
+		&::after {
+			transition: all 150ms ease-in;
+			top: 0;
+		}
+	}
+	&[disabled] {
+		cursor: not-allowed;
+		pointer-events: none;
+		opacity: 0.75;
+		top: 0;
+		&:hover {
+			&::after {
+				top: 100%;
+			}
+		}
+	}
+}
+
+.btn,
+.btn1,
+button,
+button.btn1 {
+	@include btn;
+	&.btn-sm {
+		@include btn($color1, 14, 7px 20px);
+	}
+	&.btn-lg {
+		@include btn($color1, 18, 15px 40px);
+	}
+}
+
+.btn2,
+button.btn2 {
+	@include btn($color2);
+	&.btn-sm {
+		@include btn($color2, 14, 7px 20px);
+	}
+	&.btn-lg {
+		@include btn($color2, 18, 15px 40px);
+	}
+}
+
+.btn3,
+button.btn3 {
+	@include btn($gray2alt);
+	&.btn-sm {
+		@include btn($gray2alt, 14, 7px 20px);
+	}
+	&.btn-lg {
+		@include btn($gray2alt, 18, 15px 40px);
+	}
+}
+
+@mixin button-list {
+	ul {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-start;
+		list-style-type: none;
+		margin: -5px -10px 10px -10px;
+		padding: 0;
+		&:first-child {
+			margin-top: 0;
+		}
+		&:last-child {
+			margin-bottom: 0;
+		}
+		li {
+			margin: 10px;
+			padding: 0;
+			a {
+				@include btn;
+				margin: 0;
+			}
+		}
+	}
+}
+
+.li-btn {
+	@include button-list;
+}
+
+.button-group {
+	display: block;
+	font-size: 0;
+	text-align: right;
+	margin: 20px -5px;
+	.note {
+		display: block;
+		color: $gray2;
+		font-size: remify(16);
+		line-height: 1.2;
+		margin: 5px 5px 0 5px;
+	}
+	.alert {
+		display: block;
+		color: $color-alert;
+		font-size: remify(16);
+		line-height: 1.2;
+		margin: 5px 5px 0 5px;
+	}
+	&.btn-left {
+		text-align: left;
+	}
+	&.btn-center {
+		text-align: center;
+	}
+	&.btn-flex {
+		display: flex;
+		flex-wrap: wrap;
+		text-align: center;
+		button,
+		.button {
+			flex-grow: 1;
+		}
+		.note,
+		.alert {
+			width: 100%;
+		}
+	}
+}

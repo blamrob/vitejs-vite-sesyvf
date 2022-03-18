@@ -1,0 +1,173 @@
+//   -=-=-=-=-=-=-=-
+// -=|  TYPOGRAPHY  |=-
+//   -=-=-=-=-=-=-=-
+
+html {
+	font-size: 16px;
+}
+
+body {
+	position: relative;
+	background-color: $gray3alt;
+	color: $gray3;
+	font-family: $font1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-smooth: always;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+li {
+	color: $gray3;
+	font-family: $font1;
+	font-weight: 700;
+	line-height: 1.2;
+	margin: remify(20) 0 remify(5) 0;
+	padding: 0;
+	&:first-child {
+		margin-top: 0;
+	}
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
+h1 {
+	font-size: remify(37);
+	@include phone {
+		font-size: remify(30);
+	}
+}
+
+h2 {
+	font-size: remify(30);
+	@include phone {
+		font-size: remify(26);
+	}
+}
+
+h3 {
+	font-size: remify(26);
+	@include phone {
+		font-size: remify(24);
+	}
+}
+
+h4 {
+	font-size: remify(24);
+	@include phone {
+		font-size: remify(22);
+	}
+}
+
+h5 {
+	font-size: remify(22);
+	@include phone {
+		font-size: remify(20);
+	}
+}
+
+h6 {
+	font-size: remify(20);
+	@include phone {
+		font-size: remify(19);
+	}
+}
+
+p {
+	font-size: remify(19);
+	font-weight: 300;
+	font-family: $font2;
+	line-height: 1.5;
+	margin: remify(5) 0 remify(20) 0;
+	@include phone {
+		font-size: remify(17);
+	}
+	strong,
+	b {
+		font-weight: 700;
+	}
+}
+
+li {
+	font-size: remify(19);
+	font-weight: 300;
+	font-family: $font2;
+	line-height: 1.5;
+	margin: 0 0 remify(5) 0;
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
+ul {
+	margin: remify(5) 0 remify(20) 0;
+	ul {
+		list-style-type: circle;
+	}
+}
+
+ol {
+	margin: remify(5) 0 remify(20) 0;
+	ol {
+		list-style-type: lower-alpha;
+	}
+}
+
+em {
+	color: $color1;
+	font-style: normal;
+}
+
+a {
+	transition: color 200ms;
+	cursor: pointer;
+	color: $color1;
+	text-decoration: none;
+	&:hover,
+	&:active,
+	&:focus {
+		color: $color1;
+		text-decoration: none;
+	}
+}
+
+sub,
+sup {
+	font-size: 75%;
+}
+
+blockquote {
+	border-left: 4px solid $color1;
+	display: table;
+	position: relative;
+	width: auto;
+	font-family: $font2;
+	font-size: remify(18);
+	font-style: italic;
+	line-height: 1.4;
+	margin: 30px 0;
+	padding: 20px 50px;
+	&::before {
+		display: block;
+		position: absolute;
+		top: 5px;
+		left: 15px;
+		content: '"';
+		font-size: remify(28);
+	}
+	&::after {
+		display: block;
+		position: absolute;
+		bottom: 5px;
+		right: 15px;
+		content: '"';
+		font-size: remify(28);
+	}
+}

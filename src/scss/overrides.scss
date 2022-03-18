@@ -1,0 +1,30 @@
+//   -=-=-=-=-=-=-=-
+// -=|  OVERRIDES  |=-
+//   -=-=-=-=-=-=-=-
+
+[v-cloak] {
+	display: none;
+}
+
+.fade-enter-active,
+.fade-enter-to,
+.fade-leave {
+	transition: opacity 400ms;
+	opacity: 1;
+}
+.fade-leave-active,
+.fade-leave-to,
+.fade-enter {
+	transition: opacity 400ms;
+	opacity: 0;
+}
+
+.example {
+	margin: 0 auto;
+	padding: 80px 0;
+	.box {
+		width: calc(100% - 50px);
+		max-width: 1400px;
+		margin: 0 auto;
+	}
+}

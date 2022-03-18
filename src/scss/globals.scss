@@ -1,0 +1,241 @@
+//   -=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+// -=|  VARIABLES - COLORS, ETC.  |=-
+//   -=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+// start COLORS
+$color1: #f3643e;
+$color2: #094c6d;
+
+$gray1: #d8d8d8;
+$gray2: #555555;
+$gray3: #222222;
+
+$succsess: #628d3d;
+$info: #5b8b8c;
+$alert: #d83e3b;
+// end COLORS
+
+// start FONTS
+$font1: 'Oxygen', sans-serif; // 300, 400, 700
+$font2: 'Roboto', sans-serif; // 100, 300, 400, 500, 700, 900
+// end FONTS
+
+// start BORDER RADIUS
+$rad1: 5px;
+$rad2: 10px;
+// end BORDER RADIUS
+
+// start FORM APP
+@mixin appearance($appearance) {
+	-webkit-appearance: $appearance;
+	-moz-appearance: $appearance;
+	-ms-appearance: $appearance;
+	-o-appearance: $appearance;
+	appearance: $appearance;
+}
+// end FORM APP
+
+// start REMIFY
+$em-base: 16px !default;
+$rem-base: 16px !default;
+@function strip-unit($num) {
+	@return $num / ($num * 0 + 1);
+}
+@function convert-to-rem($value, $base-value: $rem-base) {
+	$value: strip-unit($value) / strip-unit($base-value) * 1rem;
+	@if ($value == 0rem) {
+		$value: 0;
+	} // Turn 0rem into 0
+	@return $value;
+}
+@function remify($values, $base-value: $rem-base) {
+	$max: length($values);
+	@if $max == 1 {
+		@return convert-to-rem(nth($values, 1), $base-value);
+	}
+	$remValues: ();
+	@for $i from 1 through $max {
+		$remValues: append(
+			$remValues,
+			convert-to-rem(nth($values, $i), $base-value)
+		);
+	}
+	@return $remValues;
+}
+// end REMIFY
+
+// start MEDIA QUERIES
+$max-width: 1600px;
+$content-width: calc(100% - 40px);
+$phone-small-max: 374px;
+$phone-large-min: 414px;
+$phone-max: 767px;
+$tablet-min: 768px;
+$tablet-max: 1024px;
+$desktop-min: 1025px;
+$desktop-small-max: 1150px;
+$desktop-large-min: 1400px;
+@mixin phone {
+	@media (max-width: #{$phone-max}) {
+		@content;
+	}
+}
+@mixin phone-small {
+	@media (max-width: #{$phone-small-max}) {
+		@content;
+	}
+}
+@mixin phone-large {
+	@media (min-width: #{$phone-large-min}) {
+		@content;
+	}
+}
+@mixin phone-large-only {
+	@media (min-width: #{$phone-large-min}) and (max-width: #{$phone-max}) {
+		@content;
+	}
+}
+@mixin phone-portrait {
+	@media (max-width: #{$phone-max}) and (orientation: portrait) {
+		@content;
+	}
+}
+@mixin phone-landscape {
+	@media (max-width: #{$phone-max}) and (orientation: landscape) {
+		@content;
+	}
+}
+@mixin tablet {
+	@media (min-width: #{$tablet-min}) and (max-width: #{$tablet-max}) {
+		@content;
+	}
+}
+@mixin tablet-min {
+	@media (min-width: #{$tablet-min}) {
+		@content;
+	}
+}
+@mixin tablet-max {
+	@media (max-width: #{$tablet-max}) {
+		@content;
+	}
+}
+@mixin tablet-portrait {
+	@media (max-width: #{$tablet-max}) and (orientation: portrait) {
+		@content;
+	}
+}
+@mixin tablet-landscape {
+	@media (max-width: #{$tablet-max}) and (orientation: landscape) {
+		@content;
+	}
+}
+@mixin desktop {
+	@media (min-width: #{$desktop-min}) {
+		@content;
+	}
+}
+@mixin desktop-small {
+	@media (max-width: #{$desktop-small-max}) {
+		@content;
+	}
+}
+@mixin desktop-large {
+	@media (min-width: #{$desktop-large-min}) {
+		@content;
+	}
+}
+@mixin portrait {
+	@media (orientation: portrait) {
+		@content;
+	}
+}
+@mixin landscape {
+	@media (orientation: landscape) {
+		@content;
+	}
+}
+@mixin print {
+	@media print {
+		@content;
+	}
+}
+// end MEDIA QUERIES
+
+.grid.testing {
+	background-color: red;
+	.row {
+		background-color: blue;
+		.col {
+			background-color: green;
+			color: white;
+		}
+	}
+}
+
+// start GRID
+.grid {
+	overflow: hidden;
+	width: 100%;
+	.row {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		margin: 15px 0;
+		&:first-child {
+			margin-top: 0;
+		}
+		&:last-child {
+			margin-bottom: 0;
+		}
+		.col {
+			flex-grow: 1;
+			width: 100%;
+			max-width: 100%;
+			min-height: 1px;
+		}
+		.col-br {
+			width: 100% !important;
+		}
+		@mixin cols($w, $m) {
+			width: calc(#{$w} - #{$m});
+			max-width: calc(#{$w} - #{$m});
+		}
+		@media (min-width: 900px) {
+			.col-1 {
+				@include cols(8.333333%, 27.5px);
+			}
+			.col-2 {
+				@include cols(16.666666%, 25px);
+			}
+			.col-3 {
+				@include cols(25%, 22.5px);
+			}
+			.col-4 {
+				@include cols(33.333333%, 20px);
+			}
+			.col-5 {
+				@include cols(41.666666%, 17.5px);
+			}
+			.col-6 {
+				@include cols(50%, 15px);
+			}
+			.col-7 {
+				@include cols(58.333333%, 12.5px);
+			}
+			.col-8 {
+				@include cols(66.666666%, 10px);
+			}
+			.col-9 {
+				@include cols(75%, 7.5px);
+			}
+			.col-10 {
+				@include cols(83.333333%, 5px);
+			}
+			.col-11 {
+				@include cols(91.666666%, 2.5px);
+			}
+		}
+	}
+}
+// end GRID
